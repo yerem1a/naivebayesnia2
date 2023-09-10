@@ -17,8 +17,6 @@ use App\Http\Controllers\KlasifikasiController;
 
 // Route::get('/klasifikasi', [KlasifikasiController::class, 'showform'])->name('klasifikasi');
 // Route::post('/klasifikasi', [KlasifikasiController::class, 'classify'])->name('klasifikasi.classify'); // Tambahkan rute POST
-
+Route::get('/', [KlasifikasiController::class, 'showform'])->name('klasifikasi');
 Route::get('/klasifikasi', [KlasifikasiController::class, 'showform'])->name('klasifikasi');
 Route::post('/klasifikasi', [KlasifikasiController::class, 'classify'])->name('klasifikasi.classify');
-
-
