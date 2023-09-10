@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KlasifikasiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/klasifikasi', [KlasifikasiController::class, 'showform'])->name('klasifikasi');
+// Route::post('/klasifikasi', [KlasifikasiController::class, 'classify'])->name('klasifikasi.classify'); // Tambahkan rute POST
+
+Route::get('/klasifikasi', [KlasifikasiController::class, 'showform'])->name('klasifikasi');
+Route::post('/klasifikasi', [KlasifikasiController::class, 'classify'])->name('klasifikasi.classify');
+
+
