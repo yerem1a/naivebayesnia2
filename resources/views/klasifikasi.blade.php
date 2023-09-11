@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="card-body">
-      <form action="{{ route('klasifikasi.classify') }}" method="POST">
+      <form id="myForm" action="{{ route('klasifikasi.classify') }}" method="POST">
         @csrf
         <!-- Token CSRF untuk keamanan -->
         <div class="form-group">
@@ -47,14 +47,24 @@
       <!-- Hasil Klasifikasi -->
       @if(isset($hasilKlasifikasi))
       <h2>Hasil Klasifikasi:</h2>
-      {{-- <p>Penyakit yang mungkin Anda alami adalah: {{ $hasilKlasifikasi->nama }}</p> --}}
       <p>Penyakit yang mungkin Anda alami adalah: {{ $hasilKlasifikasi['nama'] }}</p>
-
       @endif
     </div>
     <!-- /.card-body -->
   </div>
   <!-- /.card -->
-
 </section>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event) {
+  // Mendapatkan daftar checkbox yang dipilih
+  var checkboxes = document.querySelectorAll('input[name="gejala[]"]:checked');
+
+  // Memeriksa apakah setidaknya satu checkbox terpilih
+  if (checkboxes.length === 0) {
+    event.preventDefault(); // Mencegah pengiriman formulir
+    alert("Harap pilih setidaknya satu gejala sebelum mengirimkan formulir.");
+  }
+});
+</script>
 @endsection
