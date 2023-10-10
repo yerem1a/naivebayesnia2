@@ -20,3 +20,4 @@ use App\Http\Controllers\KlasifikasiController;
 Route::get('/', [KlasifikasiController::class, 'showform'])->name('klasifikasi');
 Route::get('/klasifikasi', [KlasifikasiController::class, 'showform'])->name('klasifikasi');
 Route::post('/klasifikasi', [KlasifikasiController::class, 'classify'])->name('klasifikasi.classify');
+Route::get('/riwayat-gejala', [KlasifikasiController::class, 'riwayatGejala'])->name('riwayat.gejala');

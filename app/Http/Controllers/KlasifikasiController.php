@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\History;
 use App\Models\Gejala;
 
 class KlasifikasiController extends Controller
@@ -27,6 +28,8 @@ class KlasifikasiController extends Controller
 
         // Lakukan klasifikasi Naive Bayes
         $hasilKlasifikasi = $this->klasifikasiNaiveBayes($gejala);
+
+        $this->simpanKeHistory($gejala, $hasilKlasifikasi);
 
         // Tampilkan hasil klasifikasi
         return view('klasifikasi.hasil', compact('hasilKlasifikasi'));
@@ -289,4 +292,19 @@ class KlasifikasiController extends Controller
 
         return $bestClass;
     }
+    private function simpanKeHistory($gejala, $hasilKlasifikasi) {
+        // Di sini Anda dapat menggunakan model History dan menyimpan data sesuai kebutuhan
+        History::create([
+            'gejala' => json_encode($gejala),
+            'hasil' => $hasilKlasifikasi
+        ]);
+    }
+    public function riwayatGejala()
+{
+    // Ambil data riwayat dari model History
+    $riwayat_gejala = History::all();
+
+    // Kirim data ke tampilan Blade
+    return view('riwayat_gejala', compact('riwayat_gejala'));
+}
 }
