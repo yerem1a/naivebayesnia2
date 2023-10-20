@@ -32,6 +32,22 @@
         </a>
       </li>
     </ul>
+    <!-- Navbar (tempatkan di mana Anda ingin menampilkannya) -->
+<ul class="navbar-nav ml-auto">
+  @auth
+      <li class="nav-item">
+          <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              {{ __('Logout') }}
+          </a>
+      </li>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+          @csrf
+      </form>
+  @else
+      <!-- Tambahkan tautan login/register di sini jika diperlukan -->
+  @endauth
+</ul>
+
   </nav>
   <!-- /.navbar -->
 
@@ -50,7 +66,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/klasifikasi" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
               Diagnosa
