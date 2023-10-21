@@ -24,15 +24,17 @@ class KlasifikasiController extends Controller
     {
         // Ambil gejala dari formulir input
         $gejala = $request->input('gejala');
-        // dd($gejala);
 
         // Lakukan klasifikasi Naive Bayes
         $hasilKlasifikasi = $this->klasifikasiNaiveBayes($gejala);
 
-        $this->simpanKeHistory($gejala, $hasilKlasifikasi);
+        $this->simpanKeHistory($gejala, $hasilKlasifikasi['hasilKlasifikasi'], $hasilKlasifikasi['persentaseTerkenaPenyakit']);
 
         // Tampilkan hasil klasifikasi
-        return view('klasifikasi.hasil', compact('hasilKlasifikasi'));
+        return view('klasifikasi.hasil', [
+            'hasilKlasifikasi' => $hasilKlasifikasi['hasilKlasifikasi'],
+            'persentaseTerkenaPenyakit' => $hasilKlasifikasi['persentaseTerkenaPenyakit']
+        ]);
     }
 
     // Metode klasifikasi Naive Bayes
@@ -208,9 +210,25 @@ class KlasifikasiController extends Controller
         $featureProbabilities = $this->calculateFeatureProbabilities($dataRekamMedis, $gejala);
 
         // Lakukan prediksi dengan menggunakan metode yang telah Anda definisikan
-        $predictedClass = $this->predict($dataRekamMedis, $gejala, $classProbabilities, $featureProbabilities);
 
-        return $predictedClass;
+        $hasilKlasifikasi = $this->predict($dataRekamMedis, $gejala, $classProbabilities, $featureProbabilities);
+
+        $probabilitasKelas = $classProbabilities[$hasilKlasifikasi];
+        $persentaseTerkenaPenyakit = $probabilitasKelas * 100;
+    
+        // Pastikan $hasilKlasifikasi adalah array sebelum mengakses elemennya
+        if (is_array($hasilKlasifikasi)) {
+            return [
+                'hasilKlasifikasi' => $hasilKlasifikasi['hasilKlasifikasi'],
+                'persentaseTerkenaPenyakit' => $hasilKlasifikasi['persentaseTerkenaPenyakit']
+            ];
+        }
+    
+        // Jika $hasilKlasifikasi bukan array, kembalikan sesuai kebutuhan
+        return [
+            'hasilKlasifikasi' => $hasilKlasifikasi,
+            'persentaseTerkenaPenyakit' => $persentaseTerkenaPenyakit
+        ];
     }
 
     // Menghitung probabilitas prior untuk setiap kelas (penyakit)
@@ -292,11 +310,12 @@ class KlasifikasiController extends Controller
 
         return $bestClass;
     }
-    private function simpanKeHistory($gejala, $hasilKlasifikasi) {
+    private function simpanKeHistory($gejala, $hasilKlasifikasi, $persentaseTerkenaPenyakit) {
         // Di sini Anda dapat menggunakan model History dan menyimpan data sesuai kebutuhan
         History::create([
             'gejala' => json_encode($gejala),
-            'hasil' => $hasilKlasifikasi
+            'hasil' => $hasilKlasifikasi,
+            'persentase' => $persentaseTerkenaPenyakit
         ]);
     }
     public function riwayatGejala()

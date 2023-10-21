@@ -13,7 +13,14 @@
 <section class="content">
   <div class="card">
     <div class="card-body">
-      <h4 class="mb-5 mt-3">Hasil Sistem Pakar Anda adalah: <strong>{{ $hasilKlasifikasi }}</strong></h4>
+      @if(isset($hasilKlasifikasi))
+        <h4 class="mb-5 mt-3">Hasil Sistem Pakar Anda adalah: <strong>{{ $hasilKlasifikasi }}</strong></h4>
+      @endif
+      
+      @if(isset($persentaseTerkenaPenyakit))
+        <h4 class="mb-5 mt-3">Persentase Terkena Penyakit: <strong>{{ $persentaseTerkenaPenyakit }}%</strong></h4>
+      @endif
+
       <a href="/" class="btn btn-secondary">Kembali</a>
     </div>
   </div>
