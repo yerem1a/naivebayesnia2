@@ -24,14 +24,6 @@
       </li>
     </ul>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-    </ul>
     <!-- Navbar (tempatkan di mana Anda ingin menampilkannya) -->
 <ul class="navbar-nav ml-auto">
   @auth
@@ -66,8 +58,18 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/klasifikasi" class="nav-link">
+            <a href="/beranda" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
+              <p>
+              Beranda
+              </p>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="/klasifikasi" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
               <p>
               Diagnosa
               </p>

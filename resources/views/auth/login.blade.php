@@ -14,7 +14,7 @@
       <div class="col-md-6 mt-5">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title text-center">Login</h5>
+            <h5 class="card-title text-center">Login Sistem Pakar Penyakit Kulit</h5>
             <form method="POST" action="{{ route('login') }}">
               @csrf
               <div class="form-group">
@@ -39,6 +39,9 @@
 
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
+              </div>
+              <div class="text-center">
+                <p>Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></p>
               </div>
             </form>
           </div>

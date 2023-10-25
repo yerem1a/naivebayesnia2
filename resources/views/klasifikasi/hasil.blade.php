@@ -18,10 +18,13 @@
       @endif
       
       @if(isset($persentaseTerkenaPenyakit))
-        <h4 class="mb-5 mt-3">Persentase Terkena Penyakit: <strong>{{ $persentaseTerkenaPenyakit }}%</strong></h4>
+        <h4 class="mb-3 mt-3">Persentase Terkena Penyakit: <strong>{{ $persentaseTerkenaPenyakit }}%</strong></h4>
+        <div class="progress" style="height: 30px;">
+          <div class="progress-bar" role="progressbar" style="width: {{ $persentaseTerkenaPenyakit }}%;" aria-valuenow="{{ $persentaseTerkenaPenyakit }}" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
       @endif
 
-      <a href="/" class="btn btn-secondary">Kembali</a>
+      <a href="/" class="btn btn-secondary mt-3">Kembali</a>
     </div>
   </div>
 </section>
